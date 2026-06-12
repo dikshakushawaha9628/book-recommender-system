@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <style>
+        body {
+            background-color: black;
+        }
+
+        .text-white {
+            color: white !important;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 2rem;
+        }
+
+        .book-img {
+            height: 300px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .card {
+            height: 100%;
+            background-color: #1f2937;
+            border: none;
+            color: white;
+        }
+
+        .book-title {
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg px-4 py-2" style="background-color:#00a65a">
+    <div class="container-fluid">
+
+        <a class="navbar-brand text-white fw-bold fs-3" href="/">
+            📚 My Book Recommender
+        </a>
+
+        <ul class="navbar-nav ms-auto flex-row">
+            <li class="nav-item mx-3">
+                <a class="nav-link text-white fs-5" href="/">Home</a>
+            </li>
+
+            <li class="nav-item mx-3">
+                <a class="nav-link text-white fs-5" href="/recommend">
+                    Recommend
+                </a>
+            </li>
+
+            <li class="nav-item mx-3">
+                <a class="nav-link text-white fs-5" href="/contact">
+                    Contact
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+    <div class="container mt-4">
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <h1 class="text-white mb-4" style="font-size:50px">
+                    Recommend Books
+                </h1>
+
+                {% if error %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form action="/recommend_books" method="POST">
+
+                    <input
+                            name="user_input"
+                            type="text"
+                            class="form-control form-control-lg"
+                            placeholder="Enter exact book title">
+
+                    <br>
+
+                    <input
+                            type="submit"
+                            value="Recommend"
+                            class="btn btn-warning btn-lg">
+
+                </form>
+
+            </div>
+
+        </div>
+{% if matched_book %}
+<div class="alert alert-success mt-3">
+    Showing recommendations for:
+    <strong>{{ matched_book }}</strong>
+</div>
+{% endif %}
+        {% if data %}
+        <div class="row mt-5">
+
+            {% for i in data %}
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex">
+
+                <div class="card w-100">
+
+                    <div class="card-body">
+
+                        <img src="{{ i[2] }}"
+                             class="card-img-top book-img"
+                             onerror="this.src='https://via.placeholder.com/300x450?text=No+Cover'">
+
+                        <h5 class="book-title mt-3">
+                            {{ i[0] }}
+                        </h5>
+
+                        <p class="text-secondary">
+                            {{ i[1] }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body{
+            background-color:black;
+            color:white;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg px-4 py-3" style="background-color:#00a65a">
+    <div class="container-fluid">
+
+        <a class="navbar-brand text-white fw-bold fs-3" href="/">
+            📚 My Book Recommender
+        </a>
+
+        <ul class="navbar-nav ms-auto flex-row">
+            <li class="nav-item mx-3">
+                <a class="nav-link text-white fs-5" href="/">Home</a>
+            </li>
+
+            <li class="nav-item mx-3">
+                <a class="nav-link text-white fs-5" href="/recommend">
+                    Recommend
+                </a>
+            </li>
+
+            <li class="nav-item mx-3">
+                <a class="nav-link text-white fs-5" href="/contact">
+                    Contact
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+<div class="container mt-5">
+
+    <div class="card bg-dark text-white p-5">
+
+        <h1 class="mb-4">
+            Request a Book
+        </h1>
+
+        <p class="fs-5">
+            Can't find your favourite book in our collection?
+        </p>
+
+        <p class="fs-5">
+            Let us know the title of the book you would like us to add.
+            We value your suggestions and will consider including it in future updates.
+        </p>
+
+        <form action="/submit_request" method="POST">
+
+    <div class="mb-3">
+        <label class="form-label text-white">
+            Enter the book you would like us to add:
+        </label>
+
+        <input
+            type="text"
+            name="book_name"
+            class="form-control"
+            placeholder="Book Title"
+            required
+        >
+    </div>
+
+    <button type="submit" class="btn btn-warning">
+        Submit Request
+    </button>
+
+</form>
+
+{% if success %}
+<div class="alert alert-success mt-3">
+    {{ success }}
+</div>
+{% endif %}
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
