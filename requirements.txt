@@ -1,4 +1,9 @@
-flask
+fastapi
+uvicorn
 numpy
 pandas
+scikit-learn
+fuzzywuzzy
+python-Levenshtein
+flask
 gunicorn
